@@ -10,9 +10,70 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+// Regex for email validation modified from: https://www.regular-expressions.info/email.html
+// This function will be passed to validate the email input
+const requireEmail = (value) => {
+    const pattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,63}$/;
+    // Return true if the value matches the regex pattern
+    if(pattern.test(value)) {
+        return true;
+    }
+    return 'Please enter a valid email address.'
+}
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+
+// An array of questions to be used with inquirer
+const questions = [
+    {
+        type: 'input',
+        name: 'name',
+        message: 'What is the name of the employee?'
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: 'What is the employee\'s ID number?'
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'What is the employee\'s email address?',
+        validate: requireEmail,
+    },
+    {
+        type: 'list',
+        name: 'employeetype',
+        message: 'What is this employee\'s role?',
+        choices: [
+            'manager',
+            'engineer',
+            'intern',
+        ]
+    },
+    {
+        type: 'input',
+        name: 'office',
+        message: 'What is the manager\'s office number?',
+        when: (answers) => answers.employeetype === 'manager',
+    },
+    {
+        type: 'input',
+        name: 'github',
+        message: 'What is the engineer\'s github username?',
+        when: (answers) => answers.employeetype === 'engineer',
+    },
+    {
+        type: 'input',
+        name: 'school',
+        message: 'What school does the intern attend?',
+        when: (answers) => answers.employeetype === 'intern',
+    },
+];
+
+const promptUser = () => inquirer.prompt(questions);
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -33,3 +94,15 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+// Function to initialize the program
+const init = async () => {
+    try {
+        const answers = await promptUser();
+        console.log(answers);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+init();
