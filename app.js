@@ -80,9 +80,14 @@ const questions = [
     },
 ];
 
+// Get answers from the prompt questions
 const promptUser = async () => {
     const answers = await inquirer.prompt(questions);
+
+    // Create a new instance of specific employee class with the answers
     newEmployee(answers);
+
+    // If the last question, to add another employee, is true, prompt the user with questions again
     if (answers.continue) {
         promptUser();
     }
@@ -108,17 +113,38 @@ const promptUser = async () => {
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
-// Function to create instances and push to employees
+// Function to create new class instances and push to employees
 const newEmployee = (answers) => {
+    // If the the employee is a manager, create a new instance of the manager class; add it to the employees array.
+    if (answers.employeetype === 'manager') {
+        const { name, id, email, officeNumber } = answers;
+        const manager = new Manager(name, id, email, officeNumber);
+        employees.push(manager);
+        console.log(employees);
+    }
 
+    // If the the employee is a engineer, create a new instance of the engineer class; add it to the employees array.
+    if (answers.employeetype === 'engineer') {
+        const { name, id, email, github } = answers;
+        const engineer = new Engineer(name, id, email, github);
+        employees.push(engineer);
+        console.log(employees);
+    }
+
+    // If the the employee is a manager, create a new instance of the manager class; add it to the employees array.
+    if (answers.employeetype === 'intern') {
+        const { name, id, email, school } = answers;
+        const intern = new Intern(name, id, email, school);
+        employees.push(intern);
+        console.log(employees);
+    }
 }
 
 // Function to initialize the program
 const init = () => {
     promptUser();
 
-    // Make sure to store the data from the answers first, before prompting the user for answers again
-    // use a for loop here... if answer to last question is to add another employee, run prompt user again
+
 };
 
 init();
