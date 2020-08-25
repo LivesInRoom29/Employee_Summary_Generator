@@ -9,8 +9,6 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-
-
 // Takes data and writes it to a file called index.html in the output folder.
 const writeToFile = (data) => {
     fs.writeFile(outputPath, data, (err) => {
