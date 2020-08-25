@@ -1,0 +1,22 @@
+/* Change background color of jumbotron at the top of the page */
+div.jumbotron {
+    background-color: rgb(156, 216, 156);
+}
+
+div.card {
+    margin: 15px;
+}
+
+/* Change card header colors for manager and engineers */
+div.card-header.manager {
+    background-color: rgba(128, 128, 128, 0.7);
+}
+
+div.card-header.engineer {
+    background-color: rgba(128, 128, 128, 0.25);
+}
+
+/* For the labels on emplyee info */
+span.tag {
+ font-weight: bold;
+}
