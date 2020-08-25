@@ -79,7 +79,7 @@ const questions = [
 
 // Takes data and writes it to a file called index.html in the output folder.
 const writeToFile = (data) => {
-    fs.writeFile('./output/index.html', data, (err) => {
+    fs.writeFile(outputPath, data, (err) => {
         if (err) console.log(err);
         else console.log("File generated.");
     });
