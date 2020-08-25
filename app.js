@@ -10,12 +10,15 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+// Array to store employee information
+const employees = [];
+
 // Regex for email validation modified from: https://www.regular-expressions.info/email.html
 // This function will be passed to validate the email input
 const requireEmail = (value) => {
     const pattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,63}$/;
     // Return true if the value matches the regex pattern
-    if(pattern.test(value)) {
+    if (pattern.test(value)) {
         return true;
     }
     return 'Please enter a valid email address.'
@@ -54,7 +57,7 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'office',
+        name: 'officeNumber',
         message: 'What is the manager\'s office number?',
         when: (answers) => answers.employeetype === 'manager',
     },
@@ -70,10 +73,20 @@ const questions = [
         message: 'What school does the intern attend?',
         when: (answers) => answers.employeetype === 'intern',
     },
+    {
+        type: 'confirm',
+        name: 'continue',
+        message: 'Would you like to add another employee?',
+    },
 ];
 
-const promptUser = () => inquirer.prompt(questions);
-
+const promptUser = async () => {
+    const answers = await inquirer.prompt(questions);
+    newEmployee(answers);
+    if (answers.continue) {
+        promptUser();
+    }
+}
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -95,14 +108,17 @@ const promptUser = () => inquirer.prompt(questions);
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
+// Function to create instances and push to employees
+const newEmployee = (answers) => {
+
+}
+
 // Function to initialize the program
-const init = async () => {
-    try {
-        const answers = await promptUser();
-        console.log(answers);
-    } catch (err) {
-        console.log(err);
-    }
+const init = () => {
+    promptUser();
+
+    // Make sure to store the data from the answers first, before prompting the user for answers again
+    // use a for loop here... if answer to last question is to add another employee, run prompt user again
 };
 
 init();
