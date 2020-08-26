@@ -16,7 +16,7 @@ The **technology** used to create this project:
 
 ## Demo
 
-![Employee Summary Generator Demo](demo/teamgendemo.gif)
+![Employee Summary Generator Demo](demo/TeamGeneratorDemo.gif)
 
 
 ## Table of Contents
