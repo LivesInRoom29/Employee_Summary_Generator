@@ -15,25 +15,30 @@ const writeToFile = (data) => {
         if (err) console.log(err);
         else console.log("File generated.");
     });
-}
+};
 
 // Get answers from the prompt questions
 const promptUser = async () => {
-    const answers = await inquirer.prompt(questions);
+    try {
+        const answers = await inquirer.prompt(questions);
 
-    // Create a new instance of specific employee class with the answers
-    newEmployee.newEmployee(answers);
+        // Create a new instance of specific employee class with the answers
+        newEmployee.newEmployee(answers);
 
-    // If the last question, to add another employee, is true, prompt the user with questions again
-    if (answers.continue) {
-        promptUser();
-    // Otherwise use the array of employee classes to generate the html file
-    } else {
-        // Calls function from render module to create the html file
-        const html = render(newEmployee.employees);
-        writeToFile(html);
+        // If the last question, to add another employee, is true, prompt the user with questions again
+        if (answers.continue) {
+            promptUser();
+        // Otherwise use the array of employee classes to generate the html file
+        } else {
+            // Calls function from render module to create the html file
+            const html = render(newEmployee.employees);
+            writeToFile(html);
+        }
     }
-}
+    catch(err) {
+        console.log(err);
+    }
+};
 
 // Function to initialize the program
 const init = () => {
