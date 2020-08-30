@@ -12,11 +12,14 @@ The **technology** used to create this project:
 * [Node.js](https://nodejs.org/)
 * [Inquirer](https://www.npmjs.com/package/inquirer)
 * [Jest](https://jestjs.io/docs/en/getting-started)
+* [AnimateCSS](https://animate.style/)
 
 
 ## Demo
 
 ![Employee Summary Generator Demo](demo/TeamGeneratorDemo.gif)
+
+For a more detailed demonstration of the app, please check out this video: [Team Summary Demo](https://youtu.be/5328ioloafA)
 
 
 ## Table of Contents
@@ -71,6 +74,7 @@ You can find more of my work at GitHub under my username [LivesInRoom29](https:/
 * Starter code provided by Trilogy Education Services.
 * Regex for email validation modified from: https://www.regular-expressions.info/email.html
 * To generate the animated gif: https://gifcap.dev/
-* To make the instructional video: https://www.loom.com/
+* To record the instructional video: https://www.loom.com/.
+* To edit the video: https://shotcut.org/
 * Thanks to the UNH Bootcamp instructor, TAs, and tutors for giving us great instruction, resources, and support.
 * Thanks to my classmates for sharing awesome resources and questions.
